@@ -10,7 +10,15 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:request-config>
 	<flow name="indigoFlow" doc:id="b9cab575-8c16-4d8d-a117-c30068c4af5c" >
 		<logger level="INFO" doc:name="Logger" doc:id="7f8bd72f-4456-4a02-b02b-3067418cddae" message="resource.....................#[attributes.queryParams]"/>
-		<http:request method="GET" doc:name="Request" doc:id="7bdd8758-ff6e-4867-bbdd-a1ad3f88596f" config-ref="HTTP_Request_configuration" path="/api/getFlights"/>
+		<http:request method="GET" doc:name="Request" doc:id="7bdd8758-ff6e-4867-bbdd-a1ad3f88596f" config-ref="HTTP_Request_configuration" path="/api/getFlights">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	from : attributes.queryParams.source,
+	to : attributes.queryParams.destination,
+	depatureDate : attributes.queryParams.doj
+}]]]></http:query-params>
+		</http:request>
 		<ee:transform doc:name="Transform Message" doc:id="0f4d539f-6cff-4041-ab01-cab8726cc8ee" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
