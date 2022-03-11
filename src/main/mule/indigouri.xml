@@ -17,6 +17,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	depatureDate : attributes.uriParams.doj
 }]]]></http:query-params>
 		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="15098810-9c1a-42d3-8eec-b0039f311b6c" message="#[payload]"/>
 		<ee:transform doc:name="Transform Message" doc:id="3fe64b01-efbb-43a4-baa5-1c0c965dbc82" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
